@@ -23,7 +23,8 @@
 
 using namespace std;
 
-string itos(int n) {
+string atos(int n) {
+       
     string a[] = {"zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
     string b[] = {"Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
     string c[] = {"", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
@@ -47,11 +48,11 @@ string itos(int n) {
         }
     }
     if(n>99 && n<1000){
-        return   a[n/100] + d[0] +"_"+ itos(n - (n/100 * 100));
+        return   a[n/100] + d[0] +"_"+ atos(n - (n/100 * 100));
         
     }
     if(n>999 && n<10000){
-        return   a[n/1000] + d[1] +"_"+ itos(n - (n/1000 * 1000));
+        return   a[n/1000] + d[1] +"_"+ atos(n - (n/1000 * 1000));
         
     }
     
@@ -59,13 +60,44 @@ string itos(int n) {
     return "number too big";
 }
 
+string itos(int n){
+    string m = "";
+    if(n ==0 ){
+        return "0";
+    }
+    bool neg = false;
+    if(n < 0){
+        n = -1 *n;
+        neg = true;
+    }
+    while (n!=0){
+       m += n%10 + '0';
+       n = n/10;
+    }
+    if(neg == true){
+        m = m + "-";
+    }
+ int l = m.length();
+ 
+    // Swap character starting from two
+    // corners
+    for (int i=0; i<l/2; i++)
+       swap(m[i], m[l-i-1]);
+    
+    
+    return m;
+}
+
 int main(int argc, char* argv[]) {
-    int n;
+    
+  
 
     for (int i = 1; i < argc; i++) {
-        n = atoi(argv[i]);
+        int n = atoi(argv[i]);
         cout << "file " << itos(n) << ".txt" << endl;
     }
+    
+    
 
     
 
